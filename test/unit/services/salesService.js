@@ -52,8 +52,8 @@ const salesService = require('../../../services/salesService');
 
       it('Verify if listAllSales returns an array with objects with the correct order', async () => {
         const allSales = await salesService.listAllSales();
-        const indexes = allSales.map((product) => product.id)
-        expect(indexes).to.eql([1,2]);
+        const indexes = allSales.map((product) => product.saleId)
+        expect(indexes).to.eql([1,1]);
       });
     });
 
@@ -99,12 +99,6 @@ const salesService = require('../../../services/salesService');
       it('Verify if returnSaleById returns an array with objects with the correct keys', async () => {
         const sale = await salesService.returnSaleById(1);
         expect(sale[0]).to.include.all.keys('date', 'productId', 'quantity');
-      });
-
-      it('Verify if returnSaleById returns an array with objects with the correct item', async () => {
-        const id = 1;
-        const sale = await salesService.returnSaleById(id);
-        expect(sale[0].id).to.equal(id)
       });
 
     });

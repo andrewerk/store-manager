@@ -1,25 +1,28 @@
 const { expect } = require('chai');
-const productsModel = require('../../../models/productsModel');
+const salesModel = require('../../../models/salesModel');
 const sinon = require('sinon');
 const connection = require('../../../models/connection')
 
-  describe('Create model to get products', () => {
+  describe('Create model to get sales', () => {
 
-    describe('Verifies all products return correctly', () => {
+    describe('Verifies if all sales return correctly', () => {
+
 
       beforeEach(() => {
         const result = [
-          {
-            "id": 1,
-            "name": "produto A",
-            "quantity": 10
-          },
-          {
-            "id": 2,
-            "name": "produto B",
-            "quantity": 20
-          }
-        ]
+            {
+              "sale_id": 1,
+              "date": "2021-09-09T04:54:29.000Z",
+              "product_id": 1,
+              "quantity": 2
+            },
+            {
+              "sale_id": 1,
+              "date": "2021-09-09T04:54:54.000Z",
+              "product_id": 2,
+              "quantity": 2
+            }
+          ];
         sinon.stub(connection, 'execute').resolves([result]);
     });
 
@@ -28,42 +31,49 @@ const connection = require('../../../models/connection')
     });
 
       it('Verify if getAll returns an array', async () => {
-        const [allProducts] = await productsModel.getAll();
-        expect(allProducts).to.be.an('array');
+        const [allSales] = await salesModel.getAll();
+        expect(allSales).to.be.an('array');
       });
 
       it('Verify if getAll returns an array not empty', async () => {
-        const [allProducts] = await productsModel.getAll();
-        expect(allProducts).to.not.be.empty;
+        const [allSales] = await salesModel.getAll();
+        expect(allSales).to.not.be.empty;
       });
 
       it('Verify if getAll returns an array with objects', async () => {
-        const [allProducts] = await productsModel.getAll();
-        expect(allProducts[0]).to.be.an('object');
+        const [allSales] = await salesModel.getAll();
+        expect(allSales[0]).to.be.an('object');
       });
 
       it('Verify if getAll returns an array with objects with the correct keys', async () => {
-        const [allProducts] = await productsModel.getAll();
-        expect(allProducts[0]).to.include.all.keys('id', 'name', 'quantity');
+        const [allSales] = await salesModel.getAll();
+        expect(allSales[0]).to.include.all.keys('sale_id', 'date', 'product_id', 'quantity');
       });
 
       it('Verify if getAll returns an array with objects with the correct order', async () => {
-        const [allProducts] = await productsModel.getAll();
-        const indexes = allProducts.map((product) => product.id)
+        const [allSales] = await salesModel.getAll();
+        const indexes = allSales.map((product) => product.id)
         expect(indexes).to.eql([1,2]);
       });
     });
 
     describe('Verifies getById return correctly', () => {
 
+
       beforeEach(() => {
-        const result = [
+        const result =   [
           {
-            "id": 1,
-            "name": "produto A",
-            "quantity": 10
+            "date": "2021-09-09T04:54:29.000Z",
+            "product_id": 1,
+            "quantity": 2
           },
-        ]
+          {
+            "date": "2021-09-09T04:54:54.000Z",
+            "product_id": 2,
+            "quantity": 2
+          }
+        ];
+
         sinon.stub(connection, 'execute').resolves([result]);
     });
 
@@ -88,7 +98,7 @@ const connection = require('../../../models/connection')
 
       it('Verify if getById returns an array with objects with the correct keys', async () => {
         const [product] = await productsModel.getById(1);
-        expect(product[0]).to.include.all.keys('id', 'name', 'quantity');
+        expect(product[0]).to.include.all.keys('date', 'product_id', 'quantity');
       });
 
       it('Verify if getById returns an array with objects with the correct item', async () => {
@@ -100,3 +110,4 @@ const connection = require('../../../models/connection')
     });
 
   });
+

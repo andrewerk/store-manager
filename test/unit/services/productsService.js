@@ -59,7 +59,7 @@ const productsService = require('../../../services/productsService');
 
 
       beforeEach(() => {
-        const result = [
+        const result =[
           {
             "id": 1,
             "name": "produto A",
@@ -67,37 +67,38 @@ const productsService = require('../../../services/productsService');
           },
         ];
 
+
         sinon.stub(productsModel, 'getById').resolves([result]);
     });
 
       afterEach(() => {
-        productsModel.getAll.restore();
+        productsModel.getById.restore();
     });
 
       it('Verify if returnProductById returns an array', async () => {
-        const [product] = await productsService.returnProductById(1);
-        expect(product).to.be.an('array');
+        const product = await productsService.returnProductById(1);
+        expect(product).to.be.an('object');
       });
 
       it('Verify if returnProductById returns an array not empty', async () => {
-        const [product] = await productsService.returnProductById(1);
+        const product = await productsService.returnProductById(1);
         expect(product).to.not.be.empty;
       });
 
       it('Verify if returnProductById returns an array with one object', async () => {
-        const [product] = await productsService.returnProductById(1);
-        expect(product[0]).to.be.an('object');
+        const product = await productsService.returnProductById(1);
+        expect(product).to.be.an('object');
       });
 
       it('Verify if returnProductById returns an array with objects with the correct keys', async () => {
-        const [product] = await productsService.returnProductById(1);
-        expect(product[0]).to.include.all.keys('id', 'name', 'quantity');
+        const product = await productsService.returnProductById(1);
+        expect(product).to.include.all.keys('id', 'name', 'quantity');
       });
 
       it('Verify if returnProductById returns an array with objects with the correct item', async () => {
         const id = 1;
-        const [product] = await productsService.returnProductById(id);
-        expect(product[0].id).to.equal(id)
+        const product = await productsService.returnProductById(id);
+        expect(product.id).to.equal(id)
       });
 
     });

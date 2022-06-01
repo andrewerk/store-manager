@@ -80,7 +80,7 @@ describe('Testes das camadas Model, Service e Controller', () => {
   afterAll(async () => {
      await exec('rm -rf coverage .nyc_output');
   });
-  
+
   describe('1 - Escreva testes para cobrir 35% das camadas da sua aplicação', () => {
 
     it('Será validado que cobertura total das linhas dos arquivos nas pastas `models`, `services` e `controllers` é maior ou igual a 35%', async () => {
@@ -106,13 +106,13 @@ describe('Testes das camadas Model, Service e Controller', () => {
       expect(controllerLayer.total).toBeGreaterThanOrEqual(min);
       expect(controllerLayer.covered).toBeGreaterThanOrEqual(min);
       expect(porcentage(controllerLayer)).toBeGreaterThanOrEqual(max);
-      
+
 
     });
   });
-  
+
   describe('9 - Escreva testes para cobrir 40% das camadas da sua aplicação', () => {
-  
+
     it('Será validado que cobertura total das linhas dos arquivos nas pastas `models`, `services` e `controllers` é maior ou igual a 40%', async () => {
       expect(coverageResults.total.lines.pct).toBeGreaterThanOrEqual(0);
       expect(coverageResults.total.lines.covered).toBeGreaterThanOrEqual(0);
@@ -137,9 +137,9 @@ describe('Testes das camadas Model, Service e Controller', () => {
       expect(porcentage(controllerLayer)).toBeGreaterThanOrEqual(max);
     });
   });
-  
+
   describe('13 - Escreva testes para cobrir 50% das camadas da sua aplicação', () => {
-  
+
     it('Será validado que cobertura total das linhas dos arquivos nas pastas `models`, `services` e `controllers` é maior ou igual a 50%', async () => {
 
       expect(coverageResults.total.lines.pct).toBeGreaterThanOrEqual(0);
@@ -167,7 +167,7 @@ describe('Testes das camadas Model, Service e Controller', () => {
   });
 
   describe('14 - Escreva testes para cobrir 60% das camadas da sua aplicação', () => {
-  
+
     it('Será validado que cobertura total das linhas dos arquivos nas pastas `models`, `services` e `controllers` é maior ou igual a 60%', async () => {
 
       expect(coverageResults.total.lines.pct).toBeGreaterThanOrEqual(0);

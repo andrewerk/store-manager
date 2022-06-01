@@ -6,7 +6,7 @@ const getAll = () => connection
 
 const getById = (id) => connection
   .execute('SELECT date, product_id AS productId, quantity FROM sales_products'
-  + ' INNER JOIN sales ON sales.id = sales_products.sale_id WHERE sales_products.sale_id = ?;', [id]);
+  + ' INNER JOIN sales ON sales.id = sales_products.sale_id WHERE sale_id = ?;', [id]);
 
 module.exports = {
   getAll,

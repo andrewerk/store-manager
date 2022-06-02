@@ -21,4 +21,8 @@ routes.post('/', middlewares.addProductValidation, (req, res) => {
   res.status(200).json({ message: req.body });
 });
 
+routes.put('/:id', middlewares.addProductValidation, (req, res) => {
+  res.status(200).json({ message: req.body });
+});
+
 module.exports = routes;

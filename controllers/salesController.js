@@ -1,5 +1,6 @@
 const express = require('express');
 require('express-async-errors');
+const middlewares = require('../middlewares');
 const salesService = require('../services/salesService');
 
 const routes = express.Router();
@@ -14,6 +15,14 @@ routes.get('/:id', async (req, res) => {
 routes.get('/', async (_req, res) => {
   const sales = await salesService.listAllSales();
   res.status(200).json(sales);
+});
+
+routes.post('/', middlewares.addSaleValidation, (req, res) => {
+  res.status(200).json({ message: req.body });
+});
+
+routes.put('/:id', middlewares.addSaleValidation, (req, res) => {
+  res.status(200).json({ message: req.body });
 });
 
 module.exports = routes;

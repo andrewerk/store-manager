@@ -3,7 +3,7 @@ const salesModel = require('../../../models/salesModel');
 const sinon = require('sinon');
 const connection = require('../../../models/connection')
 
-  describe('Create model to get sales', () => {
+  describe('Create model to sales', () => {
 
     describe('Verifies if all sales return correctly', () => {
 
@@ -102,6 +102,29 @@ const connection = require('../../../models/connection')
       });
 
     });
+
+    describe('Verifies addSale return correctly', () => {
+
+      beforeEach(() => {
+        const result = [
+          {
+          "saleId": 1,
+          }
+        ];
+        sinon.stub(connection, 'execute').resolves([result]);
+    });
+
+      afterEach(() => {
+        connection.execute.restore();
+    });
+
+
+    it('Verify if addSale returns correctly', async () => {
+      const product = await salesModel.addSale();
+      expect(product).to.have.key('saleId');
+    });
+
+  })
 
   });
 

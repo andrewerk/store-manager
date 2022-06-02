@@ -12,7 +12,8 @@ const getAllSales = async (_req, res) => {
 };
 
 const addSale = async (req, res) => {
-  res.status(200).json({ message: req.body });
+  const result = await salesService.addSale(req.body);
+  res.status(201).json(result);
 };
 
 const editSale = async (req, res) => {

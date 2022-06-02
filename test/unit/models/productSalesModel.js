@@ -7,9 +7,9 @@ describe('Verifies if sale is added to product_sales table', () => {
 
   describe('Verifies if sale with one product is correctly added', () => {
     beforeEach(() => {
-      const result = [{
+      const result = {
         affectedRows: 1,
-      }];
+      };
       sinon.stub(connection, 'execute').resolves([result]);
       });
 

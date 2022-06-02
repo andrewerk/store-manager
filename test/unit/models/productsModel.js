@@ -99,4 +99,30 @@ const connection = require('../../../models/connection')
 
     });
 
+    describe('Verifies addProduct return correctly', () => {
+
+      beforeEach(() => {
+        const result = [
+          { "id": 1,
+            "name": "produto",
+            "quantity": 10
+           }
+        ]
+        sinon.stub(connection, 'execute').resolves([result]);
+    });
+
+      afterEach(() => {
+        connection.execute.restore();
+    });
+
+
+    it('Verify if addProduct returns', async () => {
+      const name = 'produto';
+      const quantity = 10;
+      const product = await productsModel.addProduct(name, quantity);
+      expect(product).to.all.keys('id', 'name', 'quantity');
+    });
+
+  })
+
   });

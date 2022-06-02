@@ -103,4 +103,37 @@ const productsService = require('../../../services/productsService');
 
     });
 
+    describe('Verifies if addProduct return correctly', () => {
+
+      const name = 'produto';
+      const quantity = 10;
+      beforeEach(() => {
+        const result =[
+          {
+            "id": 1,
+            "name": "produto",
+            "quantity": 10
+          },
+        ];
+
+
+        sinon.stub(productsModel, 'addProduct').resolves([result]);
+    });
+
+      afterEach(() => {
+        productsModel.addProduct.restore();
+    });
+
+      it('Verify if addProduct returns an array', async () => {
+        const product = await productsService.addProduct(name, quantity);
+        expect(product).to.include.all.keys('id', 'name', 'quantity');
+      });
+
+      it('Verify if addProduct returns an array not empty', async () => {
+        const product = await productsService.addProduct(name, quantity);
+        expect(product).to.be.empty;
+      });
+
+    });
+
   });

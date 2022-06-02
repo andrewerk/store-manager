@@ -17,12 +17,22 @@ routes.get('/', async (_req, res) => {
   res.status(200).json(products);
 });
 
-routes.post('/', middlewares.addProductValidation, (req, res) => {
-  res.status(200).json({ message: req.body });
+routes.post('/', middlewares.addProductValidation, async (req, res) => {
+  const result = await productsService.addProduct(req.body);
+  res.status(201).json(result);
 });
 
-routes.put('/:id', middlewares.addProductValidation, (req, res) => {
-  res.status(200).json({ message: req.body });
+routes.put('/:id', middlewares.addProductValidation, async (req, res) => {
+  const { id } = req.params;
+  const { name, quantity } = req.body;
+  const result = await productsService.editProduct({ id, name, quantity });
+  res.status(200).json(result);
+});
+
+routes.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  await productsService.deleteProduct(id);
+  res.status(204).end();
 });
 
 module.exports = routes;

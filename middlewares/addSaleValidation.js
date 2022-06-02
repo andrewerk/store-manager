@@ -16,7 +16,7 @@ const addSaleValidation = (req, res, next) => {
         errorStatus = 422;
       }
       const messages = error.details.map((e) => e.message);
-      return res.status(errorStatus).json({ message: messages[0] });
+      throw new Error(JSON.stringify({ status: errorStatus, message: messages[0] }));
     }
   });
 

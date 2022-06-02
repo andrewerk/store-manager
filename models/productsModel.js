@@ -11,7 +11,6 @@ const getByName = (name) => connection
 const addProduct = async (name, quantity) => {
   const [row] = await connection
   .execute('INSERT INTO products (name, quantity) VALUES(?,?) ', [name, quantity]);
-  console.log(row);
   return {
     id: row.insertId,
     name,
@@ -25,7 +24,6 @@ const editProduct = (id, name, quantity) => {
 };
 
 const deleteProduct = (id) => {
-  console.log(id);
   connection
   .execute('DELETE FROM products WHERE id = ? ', [id]);
 };

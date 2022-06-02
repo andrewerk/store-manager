@@ -103,4 +103,31 @@ const salesService = require('../../../services/salesService');
 
     });
 
+    describe('Verifies if returnSaleById throws error if id doesnt exists', () => {
+
+
+      beforeEach(() => {
+        const result =  [
+
+        ];
+
+        sinon.stub(salesModel, 'getById').resolves([result]);
+    });
+
+      afterEach(() => {
+        salesModel.getById.restore();
+    });
+
+    it('Verify if returnSaleById dont return', async () => {
+      try {
+      const sale = await salesService.returnSaleById(5);
+      expect(sale).to.be.an('array');
+      expect(sale).to.be.empty;
+      } catch(e) {
+      expect(JSON.parse(e.message).message).to.eql('Sale not found')
+      }
+    });
+
+    });
+
   });

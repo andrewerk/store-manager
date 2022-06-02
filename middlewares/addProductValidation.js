@@ -18,7 +18,7 @@ const productValidation = (req, res, next) => {
       errorStatus = 422;
     }
     const messages = error.details.map((e) => e.message);
-    res.status(errorStatus).json({ message: messages[0] });
+    throw new Error(JSON.stringify({ status: errorStatus, message: messages[0] }));
 };
 
 module.exports = productValidation;

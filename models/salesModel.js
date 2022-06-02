@@ -14,8 +14,14 @@ const addSale = async () => {
   return { saleId: row.insertId };
 };
 
+const deleteSale = async (saleId) => {
+  const [row] = await connection.execute('DELETE FROM sales WHERE id = ?', [saleId]);
+  if (row.affectedRows === 1) return true;
+};
+
 module.exports = {
   getAll,
   getById,
+  deleteSale,
   addSale,
 };

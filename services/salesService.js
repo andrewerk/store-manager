@@ -37,9 +37,19 @@ const editSaleById = async (req) => {
   };
 };
 
+const deleteSale = async (req) => {
+  const { id } = req.params;
+  const [sale] = await salesModel.getById(id);
+  if (sale.length === 0) {
+  throw new Error(JSON.stringify({ status: 404, message: 'Sale not found' }));
+  }
+  await salesModel.deleteSale(id);
+};
+
 module.exports = {
   listAllSales,
   returnSaleById,
   addSale,
   editSaleById,
+  deleteSale,
 };

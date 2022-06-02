@@ -21,9 +21,15 @@ const editSale = async (req, res) => {
   res.status(200).json(result);
 };
 
+const deleteSaleController = async (req, res) => {
+  await salesService.deleteSale(req);
+  res.status(204).end();
+};
+
 module.exports = {
   getAllSales,
   getSaleById,
   addSale,
   editSale,
+  deleteSaleController,
 };

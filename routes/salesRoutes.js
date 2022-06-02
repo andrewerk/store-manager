@@ -18,6 +18,6 @@ salesRoutes.post('/', middlewares.addSaleValidation, salesController.addSale);
 
 salesRoutes.put('/:id', middlewares.addSaleValidation, salesController.editSale);
 
-// salesRoutes.delete('/:id', salesController.deletSale);
+salesRoutes.delete('/:id', salesController.deleteSaleController);
 
 module.exports = salesRoutes;

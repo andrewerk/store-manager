@@ -17,7 +17,8 @@ const addSale = async (req, res) => {
 };
 
 const editSale = async (req, res) => {
-  res.status(200).json({ message: req.body });
+  const result = await salesService.editSaleById(req);
+  res.status(200).json(result);
 };
 
 module.exports = {

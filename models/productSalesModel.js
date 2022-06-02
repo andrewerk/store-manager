@@ -7,4 +7,11 @@ const addSaleProduct = async (saleId, productId, quantity) => {
   if (row.affectedRows === 1) return true;
 };
 
-module.exports = { addSaleProduct };
+const editSale = async (saleId, productId, quantity) => {
+  const [row] = await connection
+  .execute('UPDATE sales_products SET product_id = ? , quantity = ? WHERE sale_id = ?;',
+  [productId, quantity, saleId]);
+  if (row.affectedRows === 1) return true;
+};
+
+module.exports = { addSaleProduct, editSale };

@@ -18,10 +18,22 @@ const addSale = async (sale) => {
     await productSalesModel.addSaleProduct(saleId, productId, quantity);
     return { productId, quantity };
   }));
-  console.log(itemsSold);
   return {
     id: saleId,
     itemsSold,
+  };
+};
+
+const editSaleById = async (req) => {
+  const { id } = req.params;
+  const sale = req.body;
+  const itemUpdated = await Promise.all(sale.map(async ({ productId, quantity }) => {
+    await productSalesModel.editSale(id, productId, quantity);
+    return { productId, quantity };
+  }));
+  return {
+    saleId: id,
+    itemUpdated,
   };
 };
 
@@ -29,4 +41,5 @@ module.exports = {
   listAllSales,
   returnSaleById,
   addSale,
+  editSaleById,
 };

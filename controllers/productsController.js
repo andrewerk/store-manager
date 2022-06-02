@@ -12,9 +12,6 @@ async function getAll(_req, res) {
 }
 
 async function addProduct(req, res) {
-  const { name } = req.body;
-  console.log(name);
-  console.log(req.body);
   const result = await productsService.addProduct(req.body);
   res.status(201).json(result);
 }

@@ -17,6 +17,7 @@ const addSale = async (sale) => {
   const itemsSold = await Promise.all(sale.map(async ({ productId, quantity }) => {
     const verifyQtd = await productSalesModel.addSaleProduct(saleId, productId, quantity);
     if (!verifyQtd) {
+      await salesModel.deleteSale(saleId);
       throw new Error(JSON.stringify({
         status: 422, message: 'Such amount is not permitted to sell' }));
     }
@@ -34,6 +35,7 @@ const editSaleById = async (req) => {
   const itemUpdated = await Promise.all(sale.map(async ({ productId, quantity }) => {
     const verifyQtd = await productSalesModel.editSale(id, productId, quantity);
     if (!verifyQtd) {
+      await salesModel.deleteSale(id);
       throw new Error(JSON.stringify({
         status: 422, message: 'Such amount is not permitted to sell' }));
     }

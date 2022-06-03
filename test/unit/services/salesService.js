@@ -153,6 +153,7 @@ const productSalesModel = require('../../../models/productSalesModel');
           salesModel.addSale.restore();
           productSalesModel.addSaleProduct.restore();
       });
+
       it('Verify if addSale returns correctly', async () => {
         const result = await salesService.addSale(sale);
         expect(result).to.be.an('object');
@@ -162,5 +163,36 @@ const productSalesModel = require('../../../models/productSalesModel');
         expect(result.itemsSold[0]).to.have.all.keys('productId', 'quantity');
       });
     })
+    describe('If addSale is not allowed', () => {
+      const sale =   [
+        {
+          "productId": 1,
+          "quantity": 100
+        },
+      ];
+      const addSaleResult = {
+        saleId: 3
+      };
+      let deleteSpy;
+      beforeEach(() => {
+        sinon.stub(productSalesModel, 'addSaleProduct').resolves(false);
+        sinon.stub(salesModel, 'addSale').resolves(addSaleResult);
+        deleteSpy = sinon.spy(salesModel, 'deleteSale');
+    });
+
+      afterEach(() => {
+        salesModel.addSale.restore();
+        productSalesModel.addSaleProduct.restore();
+    });
+    it('Verify if addSale returns correctly', async () => {
+      try {
+        const result = await salesService.addSale(sale);
+        expect(deleteSpy.callCount).to.be.equal(1);
+        expect(deleteSpy.getCalls()[0].firstArg).to.contain("DELETE");
+      } catch (e) {
+        expect(JSON.parse(e.message).message).to.eql('Such amount is not permitted to sell')
+      };
+    });
+  })
   });
 });

@@ -2,6 +2,7 @@ const { expect } = require('chai');
 const salesModel = require('../../../models/salesModel');
 const sinon = require('sinon');
 const salesService = require('../../../services/salesService');
+const productSalesModel = require('../../../models/productSalesModel');
 
   describe('Create service to get sales', () => {
 
@@ -130,4 +131,36 @@ const salesService = require('../../../services/salesService');
 
     });
 
+    describe('Verifies if addSale fill all requirements', () => {
+
+      describe('If addSale is allowed', () => {
+        const sale =   [
+          {
+            "productId": 1,
+            "quantity": 2
+          },
+        ];
+        const addSaleResult = {
+          saleId: 3
+        };
+
+        beforeEach(() => {
+          sinon.stub(productSalesModel, 'addSaleProduct').resolves(true);
+          sinon.stub(salesModel, 'addSale').resolves(addSaleResult);
+      });
+
+        afterEach(() => {
+          salesModel.addSale.restore();
+          productSalesModel.addSaleProduct.restore();
+      });
+      it('Verify if addSale returns correctly', async () => {
+        const result = await salesService.addSale(sale);
+        expect(result).to.be.an('object');
+        expect(result).to.not.be.empty;
+        expect(result).to.have.all.keys('id', 'itemsSold');
+        expect(result.itemsSold).to.be.an('array');
+        expect(result.itemsSold[0]).to.have.all.keys('productId', 'quantity');
+      });
+    })
   });
+});

@@ -2,6 +2,7 @@ const { expect } = require('chai');
 const productsModel = require('../../../models/productsModel');
 const sinon = require('sinon');
 const productsService = require('../../../services/productsService');
+const { describe } = require('mocha');
 
   describe('Create service to get products', () => {
 
@@ -55,7 +56,7 @@ const productsService = require('../../../services/productsService');
       });
     });
 
-    describe('Verifies getById return correctly', () => {
+    describe('Verifies returnProductById return correctly', () => {
 
 
       beforeEach(() => {
@@ -102,5 +103,63 @@ const productsService = require('../../../services/productsService');
       });
 
     });
+    ;
+    describe('Verifies if returnProductById will throw error if id does not exists', () => {
+
+
+      beforeEach(() => {
+        const result =[];
+
+
+        sinon.stub(productsModel, 'getById').resolves([result]);
+    });
+
+      afterEach(() => {
+        productsModel.getById.restore();
+    });
+
+      it('Verify if returnProductById dont return', async () => {
+        try {
+          const sale = await productsService.returnProductById(5);
+          expect(sale).to.be.an('array');
+          expect(sale).to.be.empty;
+          } catch(e) {
+          expect(JSON.parse(e.message).message).to.eql('Product not found')
+          }
+      });
+
+    });
+
+    describe('Test addProduct ', () => {
+
+      describe('When product is successfully added', () => {
+
+        const product = {
+          name: 'produto',
+          quantity: 5,
+        }
+
+        beforeEach(() => {
+          const result = {
+            id: 4,
+            name: 'produto',
+            quantity: 5,
+          };
+
+
+          sinon.stub(productsModel, 'addProduct').resolves(result);
+      });
+
+        afterEach(() => {
+          productsModel.addProduct.restore();
+      });
+
+        it('Verify if addProduct works properly', async () => {
+            const result = await productsService.addProduct(product);
+            expect(result).to.be.an('object');
+            expect(result).to.have.all.keys('id', 'name', 'quantity');
+      });
+    });
+  });
 
   });

@@ -186,9 +186,10 @@ const productSalesModel = require('../../../models/productSalesModel');
     });
     it('Verify if fails when quantity in storage is below 0', async () => {
       try {
-        const result = await salesService.addSale(sale);
+        await salesService.addSale(sale);
         expect(deleteSpy.callCount).to.be.equal(1);
         expect(deleteSpy.getCalls()[0].firstArg).to.contain("DELETE");
+        console.log(deleteSpy);
       } catch (e) {
         expect(JSON.parse(e.message).message).to.eql('Such amount is not permitted to sell')
       };

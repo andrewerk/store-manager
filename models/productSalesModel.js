@@ -6,8 +6,7 @@ const addSaleProduct = async (saleId, productId, quantity) => {
   const [row] = await connection
   .execute('INSERT INTO sales_products (sale_id, product_id, quantity) VALUES(?,?,?);',
   [saleId, productId, quantity]);
-  const [product] = await connection
-  .execute('SELECT id, name, quantity FROM products WHERE id = ?', [productId]);
+  const [product] = await productsModel.getById(productId);
   const newQuantity = product[0].quantity - quantity;
   if (newQuantity < 0) return false;
   productsModel.editProductQuantity(productId, newQuantity);

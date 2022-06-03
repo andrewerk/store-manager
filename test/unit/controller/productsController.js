@@ -78,6 +78,39 @@ describe('Test products controller', () => {
 
         expect(response.json.calledWith(result)).to.be.equal(true);
     });
+    });
+    describe('Verifies if addProduct returns correctly', () => {
+      const result =
+        {
+          "id": 4,
+          "name": "produto",
+          "quantity": 10
+        };
+
+      const request = {};
+      const response = {};
+
+      beforeEach(() => {
+        response.status = sinon.stub().returns(response);
+        response.json = sinon.stub().returns();
+
+        sinon.stub(productsService, 'addProduct').resolves(result);
+    });
+
+      afterEach(() => {
+        productsService.addProduct.restore();
+    });
+      it('Should responde with the success code 200', async () => {
+        await productsController.addProduct(request, response);
+
+        expect(response.status.calledWith(201)).to.be.equal(true);
+    });
+
+      it('Should responde with the product', async () => {
+        await productsController.addProduct(request, response);
+
+        expect(response.json.calledWith(result)).to.be.equal(true);
+    });
   });
 });
 

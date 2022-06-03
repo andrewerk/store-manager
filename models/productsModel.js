@@ -26,7 +26,6 @@ const editProduct = (id, name, quantity) => {
 const editProductQuantity = async (id, quantity) => {
     await connection
     .execute('UPDATE products SET quantity = ? WHERE id = ? ', [quantity, id]);
-    console.log(quantity, id);
 };
 
 const deleteProduct = (id) => {

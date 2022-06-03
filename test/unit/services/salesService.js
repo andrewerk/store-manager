@@ -177,7 +177,7 @@ const productSalesModel = require('../../../models/productSalesModel');
       beforeEach(() => {
         sinon.stub(productSalesModel, 'addSaleProduct').resolves(false);
         sinon.stub(salesModel, 'addSale').resolves(addSaleResult);
-        deleteSpy = sinon.spy(salesModel, 'deleteSale');
+        deleteSpy = sinon.stub(salesModel, 'deleteSale');
     });
 
       afterEach(() => {

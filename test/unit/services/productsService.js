@@ -148,6 +148,7 @@ const { describe } = require('mocha');
 
 
           sinon.stub(productsModel, 'addProduct').resolves(result);
+          sinon.stub(productsModel, 'getByName').resolves([[]])
       });
 
         afterEach(() => {

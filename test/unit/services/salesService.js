@@ -184,7 +184,7 @@ const productSalesModel = require('../../../models/productSalesModel');
         salesModel.addSale.restore();
         productSalesModel.addSaleProduct.restore();
     });
-    it('Verify if addSale returns correctly', async () => {
+    it('Verify if fails when quantity in storage is below 0', async () => {
       try {
         const result = await salesService.addSale(sale);
         expect(deleteSpy.callCount).to.be.equal(1);

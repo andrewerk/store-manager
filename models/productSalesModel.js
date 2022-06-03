@@ -8,8 +8,10 @@ const addSaleProduct = async (saleId, productId, quantity) => {
   [saleId, productId, quantity]);
   const [product] = await connection
   .execute('SELECT id, name, quantity FROM products WHERE id = ?', [productId]);
+  console.log(product);
   const newQuantity = product[0].quantity - quantity;
   productsModel.editProductQuantity(productId, newQuantity);
+  console.log(productId, newQuantity);
   if (row.affectedRows === 1) return true;
 };
 
@@ -24,7 +26,6 @@ const editSale = async (saleId, productId, quantity) => {
     const [product] = await connection
     .execute('SELECT id, name, quantity FROM products WHERE id = ?', [productId]);
     const newQuantity = product[0].quantity + (initial[0].quantity - quantity);
-    console.log(product[0].quantity + (initial[0].quantity - quantity));
     productsModel.editProductQuantity(productId, newQuantity);
     return true;
   }

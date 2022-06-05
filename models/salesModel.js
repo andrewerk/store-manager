@@ -22,8 +22,7 @@ const deleteSale = async (saleId) => {
   const [row] = await connection.execute('DELETE FROM sales WHERE id = ?', [saleId]);
   if (row.affectedRows === 1) {
     products.forEach(async ({ productId, quantity }) => {
-      const [product] = await connection
-      .execute('SELECT id, name, quantity FROM products WHERE id = ?', [productId]);
+      const [product] = await productsModel.getById(productId);
       const newQuantity = product[0].quantity + quantity;
       productsModel.editProductQuantity(productId, newQuantity);
     });

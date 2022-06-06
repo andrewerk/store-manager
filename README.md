@@ -16,6 +16,8 @@ Finally, build the containers to run the API with docker-compose:
 
 ```docker-compose up -d```
 
+The API will be listening on `http://localhost:3000`! :rocket:
+
 This applications unit tests are still in development, but some have been already developed, resulting in test coverage of 60%. If you want to run these tests, you should enter the container shell by typing:
 
 ```docker exec -it store-manager-app sh```
@@ -28,7 +30,7 @@ If the images created for this application are removed, when rebuilding the Data
 
 ## Endpoints
 
-To use the API with some client like Insomnia or Postman, you should request to [localhost](http://localhost:3000) with the following endpoints:
+To use the API with some client like Insomnia or Postman, you should request to localhost:3000/ with the following endpoints:
 
 ### To list all products, the requisition must be of type get to the endpoint: ```/products```
 

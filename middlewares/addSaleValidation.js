@@ -7,7 +7,10 @@ const saleDTO = Joi.object({
     'any.required': '{#label} is required',
     'number.min': '{#label} must be greater than or equal to 1',
 });
-const addSaleValidation = (req, res, next) => {
+const addSaleValidation = (req, _res, next) => {
+    // if (typeof req.body !== 'array') {
+    //   throw new Error(JSON.stringify({ status: 400, message: 'Requisition body must be an array!' }));
+    // }
     req.body.forEach((item) => {
     const { error } = saleDTO.validate(item, { abortEarly: false });
     if (error) {

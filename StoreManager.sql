@@ -32,9 +32,9 @@ CREATE TABLE sales_products (
 SET SQL_SAFE_UPDATES = 0;
 
 INSERT INTO StoreManager.products (name, quantity) VALUES
-    ("Martelo de Thor", 10),
-    ("Traje de encolhimento", 20),
-    ("Escudo do Capitão América", 30);
+    ("Thor Hammer", 10),
+    ("Spider-Man Suit", 20),
+    ("Captain America Shield", 30);
 
 INSERT INTO StoreManager.sales (date) VALUES
     (NOW()),

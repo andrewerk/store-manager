@@ -20,4 +20,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - TZ=America/Sao_Paulo
+    volumes:
+    - ./mysql-dump:/docker-entrypoint-initdb.d
 

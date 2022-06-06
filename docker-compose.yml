@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    container_name: 'store-manager'
+    container_name: 'store-manager-app'
     build: .
     ports:
       - '3000:3000'

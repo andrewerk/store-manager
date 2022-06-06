@@ -38,16 +38,32 @@ To use the API with some client like Insomnia or Postman, you should request to 
 
 And to pass the validations middleware, the requisition body must be a JSON with the format: ```{ "name": "product", "quantity": 20 }```
 
-### To update a product, the requisition must be of type put to the endpoint: ```/products```
+### To update a product, the requisition must be of type put to the endpoint: ```/products/id```
 
 And to pass the validations middleware, the requisition body must be a JSON with the format: ```{ "id": 1, "name": "product", "quantity": 20 }```
 
-To list all sales: ```/sales```
+### To delete a product, the requisition must be of type delete to the endpoint: ```/products/id```
+
+### To list all sales, the requisition must be of type get to the endpoint: ```/sales```
+
+### To get a sale by id, the requisition must be of type get to the endpoint: ```/sales/id```
+
+### To add a Sale, the requisition must be of type post to the endpoint: ```/sales/```
+
+And to pass the validations middleware, the requisition body must be a JSON with the format: ```[{ "productId": 1, "quantity": 20 }]```
+Or, to include more than one product on the sale  ```[{ "productId": 1, "quantity": 5 }, { "productId": 2, "quantity": 10 }]```
+
+### To update a sale, the requisition must be of type put to the endpoint: ```/sales/id```
+
+And to pass the validations middleware, the requisition body must be a JSON with the format:  ```[{ "productId": 1, "quantity": 20 }]```
+
+### To delete a sale, the requisition must be of type delete to the endpoint: ```/sales/id```
 
 
 
 ## Skills developed during this Project
 
+During this project, we had to apply new knowledge about software backend architecture, especially about MSC (Model - Service - Controller), REST constraints to build a RESTful API, reinforce Node.js and Express concepts. We also had to reach at least 60% test coverage using Mocha, Chai, and Sinon.
 
 
 ## Credits

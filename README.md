@@ -38,11 +38,11 @@ To use the API with some client like Insomnia or Postman, you should request to 
 
 ### To add a product, the requisition must be of type post to the endpoint: ```/products```
 
-And to pass the validations middleware, the requisition body must be a JSON with the format: ```{ "name": "product", "quantity": 20 }```
+   To pass the validations middleware, the requisition body must be a JSON with the format: ```{ "name": "product", "quantity": 20 }```
 
 ### To update a product, the requisition must be of type put to the endpoint: ```/products/id```
 
-And to pass the validations middleware, the requisition body must be a JSON with the format: ```{ "id": 1, "name": "product", "quantity": 20 }```
+   To pass the validations middleware, the requisition body must be a JSON with the format: ```{ "id": 1, "name": "product", "quantity": 20 }```
 
 ### To delete a product, the requisition must be of type delete to the endpoint: ```/products/id```
 
@@ -52,12 +52,12 @@ And to pass the validations middleware, the requisition body must be a JSON with
 
 ### To add a Sale, the requisition must be of type post to the endpoint: ```/sales/```
 
-And to pass the validations middleware, the requisition body must be a JSON with the format: ```[{ "productId": 1, "quantity": 20 }]```
+   To pass the validations middleware, the requisition body must be a JSON with the format: ```[{ "productId": 1, "quantity": 20 }]```
 Or, to include more than one product on the sale  ```[{ "productId": 1, "quantity": 5 }, { "productId": 2, "quantity": 10 }]```
 
 ### To update a sale, the requisition must be of type put to the endpoint: ```/sales/id```
 
-And to pass the validations middleware, the requisition body must be a JSON with the format:  ```[{ "productId": 1, "quantity": 20 }]```
+   To pass the validations middleware, the requisition body must be a JSON with the format:  ```[{ "productId": 1, "quantity": 20 }]```
 
 ### To delete a sale, the requisition must be of type delete to the endpoint: ```/sales/id```
 

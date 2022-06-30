@@ -13,12 +13,8 @@ const productValidation = (req, res, next) => {
     if (!error) {
         return next();
     }
-    let errorStatus = 400;
-    if (error.details[0].type === 'string.min' || error.details[0].type === 'number.min') {
-      errorStatus = 422;
-    }
     const messages = error.details.map((e) => e.message);
-    throw new Error(JSON.stringify({ status: errorStatus, message: messages[0] }));
+    throw new Error(JSON.stringify({ status: 400, message: messages[0] }));
 };
 
 module.exports = productValidation;
